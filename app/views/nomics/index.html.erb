@@ -1,1 +1,74 @@
-<button class='btn btn-primary'>Hello</button>
+<div class="container">
+  <div class="row">
+    <div class=col-md-12>
+      <div style="margin-top: 5%;">
+        <div class="card">
+          <div class="card-header" id="task1">
+            <h5 class="mb-0">
+              <h4>List currencies task# 1</h4>
+            </h5>
+          </div>
+          <div class="card-body">
+            <p>Retrieve a list of cryptocurrencies given set of tickers</p>
+            <p>i.e: Given an array of [‘BTC’, ‘XRP’, ‘ETH’] </p>
+            <p>I want to get the full payload of those cryptocurrencies</p>
+            <%= link_to 'Solution', currencies_path(ids: ['BTC', 'XRP', 'ETH']), class: "btn btn-primary", target: "_blank" %>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="task2">
+            <h5 class="mb-0">
+              <h4>Currencies with params task# 2</h4>
+            </h5>
+          </div>
+          <div class="card-body">
+            <p>Retrieve a (list) specific crypto currency and specific values based on the ticker and any other dynamic params</p>
+            <p>i.e: We want to view the [circulating_supply, max_supply, name, symbol, price] for [ETH, BTC]</p>
+            <%= form_tag({controller: "nomics", action: "list_currencies"}, :method => "get", :class => 'form-horizontal') do %>
+              <div class="form-group" style="margin-bottom: 1.5em;">
+                <label for="" class="col-sm-4 control-label">Currencies</label>
+                <div class="col-sm-8">
+                  <%= select_tag :ids, options_for_select(["All", "BTC", "XRP", "ETH"]), class: 'form-control select', multiple: 'multiple' %>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 1.5em;">
+                <label for="" class="col-sm-4 control-label">Attributes</label>
+                <div class="col-sm-8">
+                  <%= select_tag :attributes, options_for_select(["All", "id", "name", "max_supply", "price"]), class: 'form-control select', prompt: "All Attributes", multiple: 'multiple' %>
+                </div>
+              </div>
+              <%= submit_tag "Solution", :class => "btn btn-primary", :formtarget => "_blank" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="task3">
+            <h5 class="mb-0">
+              <h4>Specific cryptocurrency to specific fiat task# 3</h4>
+            </h5>
+          </div>
+          <div class="card-body">
+            <p>Retrieve a specific cryptocurrency to specific fiat. i.e: BTC in ZAR or ETH in USD</p>
+            <%= form_tag({controller: "nomics", action: "fiat_currency"}, :method => "get", :class => 'form-horizontal') do %>
+              <div class="form-group" style="margin-bottom: 1.5em;">
+                <label for="" class="col-sm-4 control-label">Currency</label>
+                <div class="col-sm-8">
+                  <%= select_tag :id, options_for_select(["BTC", "XRP", "ETH"]), class: 'form-control' %>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 1.5em;">
+                <label for="" class="col-sm-4 control-label">Conversion (Currency Fiat)</label>
+                <div class="col-sm-8">
+                  <%= select_tag :fiat, options_for_select(["USD", "ZAR", "EUR"]), class: 'form-control' %>
+                </div>
+              </div>
+              <%= submit_tag "Solution", :class => "btn btn-primary", :formtarget => "_blank" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
