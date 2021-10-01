@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   get  '/currencies', to: 'nomics#list_currencies'
   get  '/fiat_currency', to: 'nomics#fiat_currency'
+  get  '/comparative_currencies', to: 'nomics#comparative_currencies'
 end

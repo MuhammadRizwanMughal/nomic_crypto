@@ -11,12 +11,12 @@ class NomicService
   }.freeze
 
   class << self
-    def get_currencies(action, params)
+    def get_currencies(action, params = {})
       ids_query = if params[:ids] == 'All'
                     'BTC,ETH,XRP'
                   elsif params[:ids].instance_of?(String)
                     params[:ids]
-                  else
+                  elsif params[:ids].present?
                     params[:ids].join(',')
                   end
 
@@ -38,6 +38,20 @@ class NomicService
       time_span = '&start=2018-04-14T00%3A00%3A00Z&end=2018-05-14T00%3A00%3A00Z'
       url = "#{BASE_URL}#{ENDPOINT[action]}#{params[:id]}#{time_span}&convert=#{params[:fiat]}"
       get_data(url)
+    end
+
+    def get_comparison(btc_value, eth_value, xrp_value)
+      {
+        "BTC_VALUE": {
+          "1BTC": ["#{(btc_value / eth_value).round(8)} ETH", "#{(btc_value / xrp_value).round(8)} XRP"]
+        },
+        "ETH_VALUE": {
+          "1ETH": ["#{(eth_value / btc_value).round(8)} BTC", "#{(eth_value / xrp_value).round(8)} XRP"]
+        },
+        "XRP_VALUE": {
+          "1XRP": ["#{(xrp_value / btc_value).round(8)} BTC", { "1XRP": "#{(xrp_value / eth_value).round(8)} ETH" }]
+        }
+      }
     end
 
     private

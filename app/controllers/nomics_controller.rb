@@ -19,4 +19,26 @@ class NomicsController < ApplicationController
       { status: 400, message: 'id and fiat are required i.e. [BTC, XRP, ETH]'}
     end
   end
+
+  ## task 4
+  def comparative_currencies
+    begin
+      response   = NomicService.get_currencies(:list_currencies, { ids: 'All'})
+      btc_value  = response[0]['price'].to_f
+      eth_value  = response[1]['price'].to_f
+      xrp_value  = response[2]['price'].to_f
+      comparison = NomicService.get_comparison(btc_value, eth_value, xrp_value)
+
+      @data = {
+        currency_values: {
+          BTC: btc_value,
+          ETH: eth_value,
+          XRP: xrp_value
+        },
+        comparative_values: comparison
+      }
+    rescue => e
+      @data = { status: 200, message: e.full_message }
+    end
+  end
 end

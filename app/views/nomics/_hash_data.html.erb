@@ -1,11 +1,15 @@
 <div class="container" style="margin: 30px ;">
   <div class="row">
     <div class=col-md-12>
+      <% if data.present? %>
       <% data.each do |key,value| %>
         <p>
           <%= key %>
           <%= value %>
         </p>
+      <% end %>
+      <% else %>
+        <p>Data is not available</p>
       <% end %>
     </div>
   </div>
