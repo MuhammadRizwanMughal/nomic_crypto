@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Nomic cryptocurrency api
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+Requirements:
 
-* System dependencies
+* Node v14 [How to install](https://nodejs.org/download/)
+* Ruby 2.2.7 [How to install](https://gorails.com/setup/osx/10.10-yosemite)
+* PostgreSQL
 
-* Configuration
+Install global dependencies:
 
-* Database creation
+    gem install bundler
 
-* Database initialization
+Install project dependencies:
 
-* How to run the test suite
+    bundle install
+    npm install OR yarn install
 
-* Services (job queues, cache servers, search engines, etc.)
+## Create File config/master.key and add the master_key in it
+## Usage
 
-* Deployment instructions
+To start the application, run:
 
-* ...
+```
+First terminal tab
+bundle exec rails server
+second terminal tab
+./bin/webpack-dev-server
+```

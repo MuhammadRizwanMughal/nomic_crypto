@@ -31,16 +31,18 @@ class NomicService
       attribute_query = attribute_query.present? ? "&attributes=#{attribute_query}" : ''
 
       url = "#{BASE_URL}#{ENDPOINT[action]}#{ids_query}#{attribute_query}"
-      # make sure that request use ssl
-      options = {
-        verify: true
-      }
-      HTTParty.get(url, options)
+      get_data(url)
     end
 
     def get_fiat_currency(action, params)
       time_span = '&start=2018-04-14T00%3A00%3A00Z&end=2018-05-14T00%3A00%3A00Z'
       url = "#{BASE_URL}#{ENDPOINT[action]}#{params[:id]}#{time_span}&convert=#{params[:fiat]}"
+      get_data(url)
+    end
+
+    private
+
+    def get_data(url)
       # make sure that request use ssl
       options = {
         verify: true
